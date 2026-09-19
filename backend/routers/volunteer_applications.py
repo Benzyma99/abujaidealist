@@ -1,6 +1,14 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
+
 from security.auth import get_current_admin
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from services.email import send_email
 
 from database import get_db
 from models.volunteer_application import (
@@ -118,5 +126,45 @@ def create_volunteer_application(
         )
 
     db.commit()
+
+    try:
+        send_email(
+            to_email=new_application.email,
+            subject="We received your AbujaIdealist volunteer application",
+            body=f"""Hello {new_application.full_name},
+
+Thank you for your interest in volunteering with AbujaIdealist.
+
+We have received your volunteer application and our team will review it.
+
+We appreciate your willingness to Connect. Inspire. Act.
+
+Best regards,
+AbujaIdealist
+"""
+        )
+    except Exception as e:
+        print(f"Applicant email failed: {e}")
+
+    try:
+        send_email(
+            to_email=ADMIN_EMAIL,
+            subject="New AbujaIdealist Volunteer Application",
+            body=f"""A new volunteer application has been submitted.
+
+Name: {new_application.full_name}
+Email: {new_application.email}
+Phone: {new_application.phone}
+Location: {new_application.location}
+Occupation: {new_application.occupation}
+Availability: {new_application.availability}
+
+Please log in to the AbujaIdealist admin dashboard to review the full application.
+
+AbujaIdealist
+"""
+        )
+    except Exception as e:
+        print(f"Admin notification email failed: {e}")
 
     return new_application
