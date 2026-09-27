@@ -9,13 +9,17 @@ class TeamMember(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(150), nullable=False)
     role = Column(String(150), nullable=False)
+
     department_id = Column(
         Integer,
         ForeignKey("departments.id"),
         nullable=False
     )
+
     image_url = Column(String, nullable=False)
     is_active = Column(Boolean, nullable=False, default=True)
+    is_leadership = Column(Boolean, nullable=False, default=False)
+    display_order = Column(Integer, nullable=False, default=0)
 
     department = relationship(
         "Department",

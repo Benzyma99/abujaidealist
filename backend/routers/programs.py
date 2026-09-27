@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from database import get_db
 from models.program import Program
 from schemas.program import ProgramCreate
+from security.auth import get_current_admin
 
 
 router = APIRouter()
@@ -15,7 +16,11 @@ def get_programs(db: Session = Depends(get_db)):
 
 
 @router.post("/")
-def create_program(program: ProgramCreate, db: Session = Depends(get_db)):
+def create_program(
+    program: ProgramCreate,
+    db: Session = Depends(get_db),
+    current_admin: int = Depends(get_current_admin)
+):
     new_program = Program(
         name=program.name,
         description=program.description,
@@ -30,7 +35,10 @@ def create_program(program: ProgramCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/{program_id}")
-def get_program(program_id: int, db: Session = Depends(get_db)):
+def get_program(
+    program_id: int,
+    db: Session = Depends(get_db)
+):
     program = db.query(Program).filter(
         Program.id == program_id
     ).first()
@@ -48,7 +56,8 @@ def get_program(program_id: int, db: Session = Depends(get_db)):
 def update_program(
     program_id: int,
     program: ProgramCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_admin: int = Depends(get_current_admin)
 ):
     existing_program = db.query(Program).filter(
         Program.id == program_id
@@ -73,7 +82,8 @@ def update_program(
 @router.delete("/{program_id}")
 def delete_program(
     program_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_admin: int = Depends(get_current_admin)
 ):
     program = db.query(Program).filter(
         Program.id == program_id

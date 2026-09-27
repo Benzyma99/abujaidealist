@@ -7,3 +7,4 @@ from .news import News
 from .admin_user import AdminUser
 from .volunteer_application import VolunteerApplication
 from .skill import Skill
+from .contact_message import ContactMessage
