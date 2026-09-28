@@ -14,6 +14,7 @@ from routers.news import router as news_router
 from routers.contact_messages import router as contact_messages_router
 from routers.skills import router as skills_router
 
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
