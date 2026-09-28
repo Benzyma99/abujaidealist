@@ -97,6 +97,7 @@
   justify-content: space-between;
   width: 100%;
 }
+
 .navbar-logo {
   margin-right: auto;
 }
@@ -147,20 +148,27 @@
     margin-top: 6px;
     text-align: center;
   }
-}
 
 @media (max-width: 900px) {
+
   .navbar-container {
+
     flex-direction: column;
+
     align-items: center;
+
   }
 
   .navbar-links {
+
     justify-content: center;
+
   }
+
 }
 
 @media (max-width: 600px) {
+
   .navbar-links {
     gap: 12px;
   }
@@ -173,10 +181,12 @@
     width: 65px;
     height: 65px;
   }
+
 }
+
 .hero {
   min-height: 680px;
-  padding: 85px 7% 80px; 
+  padding: 85px 7%;
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   align-items: center;
@@ -258,18 +268,65 @@
   transform: translateY(-2px);
 }
 
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 430px;
+  margin-left: auto;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.14);
+}
+
+.hero-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: center top;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.hero-slide-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.hero-slide-dots button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.hero-slide-dots button.active {
+  width: 24px;
+  border-radius: 10px;
+  background: var(--primary-blue);
+}
+
 /* Hero image */
 .hero-image {
   position: relative;
   z-index: 1;
   display: block;
   width: 100%;
-  height: 520px;
+  max-width: 430px;
+  height: 320px;
+  margin-left: auto;
   object-fit: cover;
   object-position: center;
   border-radius: 28px;
   box-shadow: 0 24px 55px rgba(0, 0, 0, 0.14);
 }
+
 /* Connect - Inspire - Act */
 
 .hero-values {
@@ -344,12 +401,20 @@
   }
 
   .hero-image-wrapper {
-    margin: 0 auto;
-  }
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 18px;
+}
 
-  .hero-values {
-    justify-content: center;
-  }
+.hero-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 18px;
+}
 }
 
 @media (max-width: 600px) {
@@ -407,7 +472,6 @@
     width: 100%;
     max-width: 280px;
   }
-}
 
 .about-preview {
   padding: 100px 7%;
@@ -482,7 +546,7 @@
   color: var(--secondary-green);
 }
 .programs-preview {
-  padding: 100px 7%;
+  padding: 70px 7% 35px;
   background: #ffffff;
 }
 
@@ -583,7 +647,7 @@
   }
 }
 .impact-preview {
-  padding: 100px 7%;
+  padding: 35px 7% 70px;
   background: #f7fafc;
 }
 
@@ -1032,15 +1096,20 @@
   color: var(--text-light);
   font-size: 17px;
 }
-
 @media (max-width: 650px) {
+
   .team-cards {
+
     grid-template-columns: 1fr;
+
   }
+
 }
 
 .founder-section {
+
   margin-bottom: 80px;
+
 }
 
 .founder-card {
@@ -1114,38 +1183,61 @@
 }
 
 @media (max-width: 650px) {
+
   .founder-card {
+
     flex-direction: column;
+
     padding: 30px 24px;
+
     text-align: center;
+
   }
 
   .founder-image {
-  width: 150px;
-  height: 150px;
-}
+
+    width: 150px;
+
+    height: 150px;
+
   }
-.founder-image {
-  width: 180px;
-  height: 180px;
-  flex-shrink: 0;
-  overflow: hidden;
 
-  border: 4px solid var(--accent-yellow);
-  border-radius: 50%;
-}
+  .founder-image {
 
-.founder-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
+    width: 180px;
 
-  object-fit: cover;
-  object-position: center;
-}
+    height: 180px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border: 4px solid var(--accent-yellow);
+
+    border-radius: 50%;
+
+  }
+
+  .founder-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+
+  }
+
   .team-section h2 {
+
     font-size: 32px;
+
   }
+
 }
 /* Team member images */
 .team-card .team-image {
@@ -3610,5 +3702,15 @@ main.team-page .team-card .team-card-photo img {
 
   .admin-status-action {
     width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .programs-preview {
+    padding: 50px 20px 20px;
+  }
+
+  .impact-preview {
+    padding: 20px 20px 55px;
   }
 }

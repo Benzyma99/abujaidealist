@@ -1,8 +1,27 @@
 import { useEffect, useState } from "react";
-import heroImage from "../assets/abujaidealist-hero.png";
+import heroImage1 from "../assets/homepage-slide-1.png";
+import heroImage2 from "../assets/homepage-slide-2.jpg";
+import heroImage3 from "../assets/homepage-slide-3.jpg";
+import heroImage4 from "../assets/homepage-slide-4.png";
 import API_BASE_URL from "../services/api";
 
 function Home() {
+const heroSlides = [
+  heroImage1,
+  heroImage2,
+  heroImage3,
+  heroImage4,
+];
+
+const [currentSlide, setCurrentSlide] = useState(0);
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, []);
+
   const [programs, setPrograms] = useState([]);
   const [programsLoading, setProgramsLoading] = useState(true);
 
@@ -82,12 +101,23 @@ function Home() {
         </div>
 
         <div className="hero-image-wrapper">
-          <img
-            src={heroImage}
-            alt="AbujaIdealist community volunteers"
-            className="hero-image"
-          />
-        </div>
+  <img
+    src={heroSlides[currentSlide]}
+    alt={`AbujaIdealist community activity ${currentSlide + 1}`}
+  />
+
+  <div className="hero-slide-dots">
+    {heroSlides.map((_, index) => (
+      <button
+        key={index}
+        type="button"
+        className={index === currentSlide ? "active" : ""}
+        onClick={() => setCurrentSlide(index)}
+        aria-label={`Show slide ${index + 1}`}
+      />
+    ))}
+  </div>
+</div>
       </section>
 
       {/* PROGRAMS */}
