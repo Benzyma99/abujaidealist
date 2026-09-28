@@ -1873,7 +1873,7 @@ main.team-page .team-card .team-card-photo img {
 
 /* Projects section */
 .projects-section {
-  padding: 55px 20px;
+  padding: 5px 15px 55px;
 }
 
 .projects-container {
@@ -2191,7 +2191,7 @@ main.team-page .team-card .team-card-photo img {
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 11px 13px;
+  padding: 9px 12px;
   border: 1px solid var(--border-light);
   border-radius: 7px;
   background: #ffffff;
@@ -2208,7 +2208,7 @@ main.team-page .team-card .team-card-photo img {
 }
 
 .form-group textarea {
-  min-height: 120px;
+  min-height: 105px;
   resize: vertical;
 }
 
@@ -2237,9 +2237,12 @@ main.team-page .team-card .team-card-photo img {
   background: #f4fbf6;
 }
 
-.checkbox-item input {
-  width: 17px;
-  height: 17px;
+.checkbox-item input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  flex: 0 0 16px;
   accent-color: var(--primary-blue);
 }
 
