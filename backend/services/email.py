@@ -1,25 +1,23 @@
 import os
-import smtplib
-from email.message import EmailMessage
 
+import resend
 from dotenv import load_dotenv
 
 load_dotenv()
 
-MAIL_USERNAME = os.getenv("MAIL_USERNAME")
-MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
-MAIL_FROM = os.getenv("MAIL_FROM")
+RESEND_API_KEY = os.getenv("RESEND_API_KEY")
+MAIL_FROM = os.getenv("MAIL_FROM", "onboarding@resend.dev")
+
+if not RESEND_API_KEY:
+    raise RuntimeError("RESEND_API_KEY is not configured.")
+
+resend.api_key = RESEND_API_KEY
 
 
 def send_email(to_email: str, subject: str, body: str):
-    message = EmailMessage()
-
-    message["From"] = MAIL_FROM
-    message["To"] = to_email
-    message["Subject"] = subject
-
-    message.set_content(body)
-
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login(MAIL_USERNAME, MAIL_PASSWORD)
-        smtp.send_message(message)
+    resend.Emails.send({
+        "from": MAIL_FROM,
+        "to": [to_email],
+        "subject": subject,
+        "text": body,
+    })
